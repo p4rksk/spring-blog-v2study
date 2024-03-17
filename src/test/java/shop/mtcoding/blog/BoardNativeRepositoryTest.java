@@ -10,9 +10,24 @@ import shop.mtcoding.blog.board.BoardNativeRepository;
 
 import java.util.List;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+
 @Import(BoardNativeRepository.class)
 @DataJpaTest
 public class BoardNativeRepositoryTest {
+    @Test
+    public void findById_test(){
+        // given
+        int id = 1;
+
+        // when
+        Board board = boardNativeRepository.findById(id);
+        //System.out.println("findById_test "+board);
+
+        // then
+        assertThat(board.getTitle()).isEqualTo("제목1");
+        assertThat(board.getContent()).isEqualTo("내용1");
+    }
 
     @Autowired
     private BoardNativeRepository boardNativeRepository;

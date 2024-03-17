@@ -21,6 +21,21 @@ public class BoardPersistRepositoryTest {
     private BoardPersistRepository boardPersistRepository;
 
     @Test
+    public void findById_test() {
+        // given
+        int id = 1;
+
+        // when
+        Board board = boardPersistRepository.findById(id);
+
+        System.out.println("findById_test "+board);
+
+        // then
+        assertThat(board.getTitle()).isEqualTo("제목1");
+        assertThat(board.getContent()).isEqualTo("내용1");
+    }
+
+    @Test
     public void findAll_test() {
         // given
 

@@ -1,14 +1,15 @@
 package shop.mtcoding.blog.board;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.sql.Timestamp;
 
 @NoArgsConstructor
-@Entity(name = "board_tb")
-@Table
+@Entity
+@Table(name = "board_tb")
 @Data
 public class Board {
     @Id
@@ -19,7 +20,7 @@ public class Board {
     private String content;
     private Timestamp createdAt;
 
-
+    @Builder
     public Board(String title, String content, String username) {
         this.title = title;
         this.content = content;

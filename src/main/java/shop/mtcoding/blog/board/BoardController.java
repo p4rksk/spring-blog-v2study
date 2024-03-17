@@ -13,9 +13,11 @@ import java.util.List;
 @Controller
 public class BoardController {
     private final BoardNativeRepository boardNativeRepository;
+    private final BoardPersistRepository boardPersistRepository;
+
     @PostMapping("/board/save")
-    public String save(String title, String content, String username){
-        boardNativeRepository.save(username,content,title);
+    public String save(BoardRequest.SaveDTO reqDTO){
+        boardPersistRepository.save(reqDTO.toEntity());
         return "redirect:/";
     }
     @GetMapping("/" )

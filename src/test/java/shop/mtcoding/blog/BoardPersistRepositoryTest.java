@@ -1,5 +1,6 @@
 package shop.mtcoding.blog;
 
+import jakarta.persistence.EntityManager;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,24 @@ public class BoardPersistRepositoryTest {
 
     @Autowired
     private BoardPersistRepository boardPersistRepository;
+
+    @Autowired
+    private EntityManager em;
+
+    @Test
+    public void updateById_test(){
+        // given
+        int id = 1;
+        String title = "제목수정1";
+
+        // when
+        Board board = boardPersistRepository.findById(id);
+        board.setTitle(title);
+        em.flush();
+
+        //then
+    }//더티 체킹
+
 
     @Test
     public void deleteById_test(){

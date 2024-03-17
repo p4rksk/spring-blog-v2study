@@ -22,7 +22,7 @@ public class BoardController {
     }
     @GetMapping("/" )
     public String index(HttpServletRequest req) {
-        List<Board> boardList = boardNativeRepository.findAll();
+        List<Board> boardList = boardPersistRepository.findAll();
         req.setAttribute("boardList",boardList);
         return "index";
     }

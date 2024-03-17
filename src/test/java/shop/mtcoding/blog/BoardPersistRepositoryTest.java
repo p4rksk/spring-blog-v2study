@@ -13,12 +13,21 @@ import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-@Import(BoardNativeRepository.class)
+@Import(BoardPersistRepository.class)
 @DataJpaTest
 public class BoardPersistRepositoryTest {
 
     @Autowired
     private BoardPersistRepository boardPersistRepository;
+
+    @Test
+    public void deleteById_test(){
+        // given
+        int id = 1;
+
+        // when
+        boardPersistRepository.deleteById(id);
+    }
 
     @Test
     public void findById_test() {

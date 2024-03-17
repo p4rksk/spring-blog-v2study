@@ -12,7 +12,8 @@ import java.util.List;
 @RequiredArgsConstructor
 @Controller
 public class BoardController {
-    private final BoardNativeRepository boardNativeRepository;
+    private final BoardRepository boardRepository;
+
 
     @PostMapping("/board/save")
     public String save(){
@@ -30,6 +31,8 @@ public class BoardController {
 
     @GetMapping("/board/{id}")
     public String detail(@PathVariable Integer id,HttpServletRequest req) {
+        Board board = boardRepository.findByIdJoinUser(id);
+        req.setAttribute("board",board);
         return "board/detail";
     }
 

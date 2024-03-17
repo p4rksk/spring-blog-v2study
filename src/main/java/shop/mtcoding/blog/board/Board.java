@@ -4,33 +4,35 @@ import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
+import shop.mtcoding.blog.user.User;
 
 import java.sql.Timestamp;
 
 @NoArgsConstructor
-@Entity
-@Table(name = "board_tb")
 @Data
+@Table(name = "board_tb")
+@Entity
 public class Board {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id; //pk
-    private String username;
+    private Integer id;
     private String title;
     private String content;
+
+    //@JoinColumn(name = "user_id")
+    @ManyToOne
+    private User user; // db -> user_id
+
+    @CreationTimestamp // pc -> db (날짜주입)
     private Timestamp createdAt;
 
     @Builder
-    public Board(String title, String content, String username) {
+    public Board(Integer id, String title, String content, User user, Timestamp createdAt) {
+        this.id = id;
         this.title = title;
         this.content = content;
-        this.username = username;
-    }
-
-    public void update(BoardRequest.UpdateDTO reqDTO){
-        this.title = reqDTO.getTitle();
-        this.content = reqDTO.getContent();
-        this.username = reqDTO.getUsername();
-
+        this.user = user;
+        this.createdAt = createdAt;
     }
 }

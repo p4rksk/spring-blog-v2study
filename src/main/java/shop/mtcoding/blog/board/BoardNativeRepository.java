@@ -4,10 +4,20 @@ import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @Repository
-public class BoardRepository {
+public class BoardNativeRepository {
     private final EntityManager em;
+
+    public List<Board>findAll(){
+        String q = """
+                select * from board_tb order by id desc
+                """;
+        List<Board> boardList = em.createNativeQuery(q,Board.class).getResultList();
+        return boardList;
+    }
 
     public void save(String username, String title, String content) {
         String q = """
@@ -19,5 +29,6 @@ public class BoardRepository {
                 .setParameter(3, content)
                 .executeUpdate();
     }
+
 }
 

@@ -7,7 +7,9 @@ import org.springframework.context.annotation.Import;
 import shop.mtcoding.blog.board.Board;
 import shop.mtcoding.blog.board.BoardRepository;
 
-@Import(BoardRepositoryTest.class)
+import java.util.List;
+
+@Import(BoardRepository.class)
 @DataJpaTest
 public class BoardRepositoryTest {
     @Autowired
@@ -20,6 +22,19 @@ public class BoardRepositoryTest {
 
         //when
         boardRepository.findById(id);
+    }
+
+    @Test
+    public void findAll_test() {
+        // given
+
+        // when
+        List<Board> boardList = boardRepository.findAll();
+        boardList.forEach(board -> {
+            System.out.println(board.getUser().getUsername());
+        });
+
+        // then
     }
 
 }

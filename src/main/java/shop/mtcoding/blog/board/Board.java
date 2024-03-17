@@ -1,38 +1,19 @@
 package shop.mtcoding.blog.board;
 
 import jakarta.persistence.*;
-import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.apache.catalina.User;
-import org.hibernate.annotations.CreationTimestamp;
 
-import java.security.Timestamp;
+import java.sql.Timestamp;
 
-@NoArgsConstructor
+@Entity(name = "board_tb")
+@Table
 @Data
-@Table(name = "board_tb")
-@Entity
 public class Board {
     @Id
-@GeneratedValue(strategy = GenerationType.IDENTITY)
-private Integer id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id; //pk
+    private String username;
     private String title;
     private String content;
-
-    //@JoinColumn(name = "user_id")
-    @ManyToOne
-    private User user; // db -> user_id
-
-    @CreationTimestamp // pc -> db (날짜주입)
     private Timestamp createdAt;
-
-    @Builder
-    public Board(Integer id, String title, String content, User user, Timestamp createdAt) {
-        this.id = id;
-        this.title = title;
-        this.content = content;
-        this.user = user;
-        this.createdAt = createdAt;
-    }
 }

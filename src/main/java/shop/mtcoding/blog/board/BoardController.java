@@ -36,4 +36,10 @@ public class BoardController {
         req.setAttribute("board",board);
         return "board/detail";
     }
+
+    @PostMapping("/board/{id}/delete")
+    public String delete(@PathVariable Integer id){
+        boardNativeRepository.deleteById(id);
+        return "redirect:/";
+    }
 }

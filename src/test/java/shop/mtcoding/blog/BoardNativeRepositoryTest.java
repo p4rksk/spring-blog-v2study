@@ -16,6 +16,18 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 @DataJpaTest
 public class BoardNativeRepositoryTest {
     @Test
+    public void deleteById_test(){
+        // given
+        int id = 1;
+
+        // when
+        boardNativeRepository.deleteById(id);
+
+        // then
+        List<Board> boardList = boardNativeRepository.findAll();
+        assertThat(boardList.size()).isEqualTo(3);
+    }
+    @Test
     public void findById_test(){
         // given
         int id = 1;

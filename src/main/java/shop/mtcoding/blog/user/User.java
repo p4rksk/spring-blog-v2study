@@ -1,9 +1,11 @@
 package shop.mtcoding.blog.user;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.boot.autoconfigure.elasticsearch.ElasticsearchConnectionDetails;
 
 import java.sql.Timestamp;
 
@@ -29,4 +31,16 @@ public class User {
         this.password = password;
         this.email = email;
     }
+
+    @Builder
+    public User(Integer id, String username, String password, String email, Timestamp createdAt) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.createdAt = createdAt;
+    }
+
+
+
 }
